@@ -1,4 +1,4 @@
-import prisma from "@/lib/db";
+import { createUser, getSavedAlbums, getUser } from "@/server/queries";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
@@ -8,18 +8,16 @@ export default async function Home() {
         redirect("/login");
     }
 
-    const saved_albums = await prisma.savedAlbums.findFirst({
-        include: {
-            albums: {
-                include: {
-                    artists: true,
-                    images: true,
-                    tracks: true,
-                },
-            },
-        },
-    });
+    const email = String(session.user.email);
+    const name = String(session.user.name);
+    const image = String(session.user.image);
 
+    const userExists = await getUser(email);
+    if (!userExists) {
+        await createUser({ name, image, email });
+    }
+
+    const saved_albums = await getSavedAlbums();
     if (!saved_albums) {
         return null;
     }

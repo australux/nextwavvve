@@ -8,12 +8,17 @@ import { ListItem } from "./ui/ListItem";
 import sdk from "@/lib/spotify-sdk/ClientInstance";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "./ui/Button";
-import { SimplifiedAlbum } from "@spotify/web-api-ts-sdk";
+import { Album } from "@spotify/web-api-ts-sdk";
 import { SuggestionCard } from "./ui/SuggestionCard";
+import { useSession } from "next-auth/react";
+import { handleSelection } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 
 export const SearchBar = () => {
     const [q, setQ] = useState<string>("");
     const [inputValue, setInputValue] = useState<string>("");
+    const { data: session } = useSession();
+    const router = useRouter();
 
     async function fetchSearch(q: string) {
         if (!q) throw new Error("There's no search query");
@@ -54,9 +59,13 @@ export const SearchBar = () => {
         setQ(inputValue);
     }
 
-    function handleClick(album: SimplifiedAlbum) {
-        // handleSelection(album.id)
+    async function handleClick(id: string) {
+        const fullAlbum: Album = await sdk.makeRequest("GET", `albums/${id}`);
+        if (session?.user?.email) {
+            await handleSelection(session.user.email, fullAlbum);
+        }
         setInputValue("");
+        router.refresh();
     }
 
     return (
@@ -99,7 +108,7 @@ export const SearchBar = () => {
                         results?.albums.items.map((album) => (
                             <ListItem
                                 key={album.id}
-                                onClick={() => handleClick(album)}
+                                onClick={() => handleClick(album.id)}
                             >
                                 <SuggestionCard album={album} />
                             </ListItem>

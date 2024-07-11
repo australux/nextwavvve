@@ -8,6 +8,7 @@ async function main() {
             id: "11154448458",
             image: "https://scontent-cdg4-1.xx.fbcdn.net/v/t31.18172-1/21993175_1612171098847917_9208209011408237851_o.jpg?stp=cp0_dst-jpg_p50x50&_nc_cat=105&ccb=1-7&_nc_sid=312bcd&_nc_ohc=oKdoP9ju0rcQ7kNvgGjYaBs&_nc_ht=scontent-cdg4-1.xx&edm=AP4hL3IEAAAA&oh=00_AYApy2D2ade9FoxsEvzHFyov6dP_-Y57D9Ftqi2V4FIwLg&oe=66B371E6",
             name: "Luciano Montilla",
+            email: "lxcxxnx7@gmail.com",
             savedAlbums: {
                 create: {
                     albums: {
