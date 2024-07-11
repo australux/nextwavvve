@@ -15,7 +15,7 @@ datasource db {
 
 
 model User {
-  id    String    @id 
+  id    String  @id @default(cuid())
   name  String
   image String
   savedAlbums SavedAlbums?
@@ -40,10 +40,10 @@ model Album {
 }
 
 model Image {
-  id  String  @id
+  id  Int  @id @default(autoincrement())
   url String
-  height  String
-  width String
+  height  Int
+  width Int
   album Album @relation(fields: [albumId], references: [id])
   albumId String
 }

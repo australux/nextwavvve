@@ -4,7 +4,13 @@ const nextConfig = {
         remotePatterns: [
             {
                 protocol: "https",
-                hostname: "scontent-ams2-1.xx.fbcdn.net",
+                hostname: "scontent-***.xx.fbcdn.net",
+                port: "",
+                pathname: "/**",
+            },
+            {
+                protocol: "https",
+                hostname: "i.scdn.co",
                 port: "",
                 pathname: "/**",
             },

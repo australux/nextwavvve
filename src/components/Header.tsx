@@ -3,6 +3,7 @@
 import { useSession } from "next-auth/react";
 import { Profile } from "./Profile";
 import { Wavvve } from "./ui/Svgs";
+import { SearchBar } from "./SearchBar";
 
 export const Header = () => {
     const { data: session } = useSession();
@@ -14,7 +15,9 @@ export const Header = () => {
                     <div className="flex items-center h-full">
                         <Wavvve />
                     </div>
-                    <div></div>
+                    <div className="flex justify-center w-full">
+                        <SearchBar />
+                    </div>
                     <div className="w-16">{session.user && <Profile />}</div>
                 </div>
             </header>
