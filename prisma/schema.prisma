@@ -8,58 +8,50 @@ generator client {
 datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
-//   provider = "postgresql"
-//   url = env("POSTGRES_PRISMA_URL") // uses connection pooling
-//   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+  //   provider = "postgresql"
+  //   url = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  //   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
-
 
 model User {
-  id    String  @id @default(cuid())
-  name  String
-  image String
-  email String  @unique
-  savedAlbums SavedAlbums?
-}
-
-model SavedAlbums {
-  id  String  @id @default(cuid())
-  user  User  @relation(fields: [userId], references: [id])
-  userId  String  @unique
-  albums Album[]
+  id          String  @id @default(cuid())
+  name        String
+  image       String
+  email       String  @unique
+  savedAlbums Album[]
 }
 
 model Album {
-  id  String  @id
-  name  String
+  id      String   @id
+  name    String
   artists Artist[]
   images  Image[]
-  rating  String  @default("G")
+  rating  String   @default("G")
   tracks  Track[]
-  isSaved SavedAlbums @relation(fields: [savedIn], references: [id])
-  savedIn String
+  User    User?    @relation(fields: [userId], references: [id])
+  userId  String?
 }
 
 model Image {
-  id  Int  @id @default(autoincrement())
-  url String
+  id      Int    @id @default(autoincrement())
+  url     String
   height  Int
-  width Int
-  album Album @relation(fields: [albumId], references: [id])
+  width   Int
+  album   Album  @relation(fields: [albumId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   albumId String
 }
 
 model Artist {
-  id  String  @id
-  name  String
-  albums Album @relation(fields: [albumId], references: [id])
+  id      String @id
+  name    String
+  albums  Album  @relation(fields: [albumId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   albumId String
 }
 
 model Track {
-  id  String  @id
-  name  String
-  rating  String  @default("G")
-  album Album @relation(fields: [albumId], references: [id])
+  id      String @id
+  name    String
+  rating  String @default("G")
+  album   Album  @relation(fields: [albumId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   albumId String
 }

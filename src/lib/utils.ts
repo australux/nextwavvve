@@ -1,4 +1,4 @@
-import { getUser, updateSavedAlbums } from "@/server/queries";
+import { getUser, saveAlbum } from "@/server/queries";
 import { Album } from "@spotify/web-api-ts-sdk";
 import clsx from "clsx";
 import { ClassValue } from "clsx";
@@ -24,6 +24,10 @@ export async function handleSelection(userEmail: string, album: Album) {
     };
     const user = await getUser(userEmail);
     if (user) {
-        await updateSavedAlbums(user.id, formatedAlbum);
+        try {
+            await saveAlbum(formatedAlbum);
+        } catch (error) {
+            console.error(error);
+        }
     }
 }

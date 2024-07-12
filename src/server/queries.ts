@@ -16,9 +16,6 @@ export async function createUser({
             name: name,
             image: image,
             email: email,
-            savedAlbums: {
-                create: {},
-            },
         },
     });
     return user;
@@ -37,69 +34,55 @@ export async function getSavedAlbums() {
     const session = await getServerSession();
     if (!session?.user) throw new Error("Unauthorized");
 
-    const savedAlbums = await prisma.savedAlbums.findFirst({
+    const savedAlbums = await prisma.album.findMany({
         include: {
-            albums: {
-                include: {
-                    artists: true,
-                    images: true,
-                    tracks: true,
-                },
-            },
+            images: true,
+            artists: true,
+            tracks: true,
         },
     });
 
     return savedAlbums;
 }
 
-export async function updateSavedAlbums(
-    userId: string,
-    {
-        id,
-        name,
-        artists,
-        images,
-        tracks,
-    }: {
-        id: string;
-        name: string;
-        artists: { id: string; name: string }[];
-        images: { url: string; height: number; width: number }[];
-        tracks: { id: string; name: string }[];
-    }
-) {
+export async function saveAlbum(album: {
+    id: string;
+    name: string;
+    artists: { id: string; name: string }[];
+    images: { url: string; height: number; width: number }[];
+    tracks: { id: string; name: string }[];
+}) {
     const session = await getServerSession();
     if (!session?.user) throw new Error("Unauthorized");
 
-    try {
-        return await prisma.savedAlbums.update({
-            where: { userId: userId },
-            data: {
-                albums: {
-                    create: {
-                        id: id,
-                        name: name,
-                        artists: {
-                            createMany: {
-                                data: artists,
-                            },
-                        },
-                        images: {
-                            createMany: {
-                                data: images,
-                            },
-                        },
-                        tracks: {
-                            createMany: {
-                                data: tracks,
-                            },
-                        },
-                    },
+    return await prisma.album.create({
+        data: {
+            id: album.id,
+            name: album.name,
+            artists: {
+                createMany: {
+                    data: album.artists,
                 },
             },
-        });
-    } catch (error) {
-        console.error(error);
-        throw new Error("Couldn't update saved albums");
-    }
+            images: {
+                createMany: {
+                    data: album.images,
+                },
+            },
+            tracks: {
+                createMany: {
+                    data: album.tracks,
+                },
+            },
+        },
+    });
+}
+
+export async function deleteAlbum(id: string) {
+    const session = await getServerSession();
+    if (!session?.user) throw new Error("Unauthorized");
+
+    return await prisma.album.delete({
+        where: { id },
+    });
 }

@@ -1,3 +1,4 @@
+import { AlbumCard } from "@/components/AlbumCard";
 import { createUser, getSavedAlbums, getUser } from "@/server/queries";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
@@ -17,22 +18,19 @@ export default async function Home() {
         await createUser({ name, image, email });
     }
 
-    const saved_albums = await getSavedAlbums();
-    if (!saved_albums) {
+    const albumsList = await getSavedAlbums();
+    if (!albumsList) {
         return null;
     }
 
     return (
         <div>
             <h1>Home Page</h1>
-            {saved_albums.albums.map((album) => (
-                <div key={album.id}>
-                    <p>{album.name}</p>
-                    {album.artists.map((artist) => (
-                        <p key={artist.id}>{artist.name}</p>
-                    ))}
-                </div>
-            ))}
+            <div className="flex flex-col w-full max-w-screen-xl gap-4 px-4 py-4 sm:grid sm:grid-cols-2 lg:grid-cols-3">
+                {albumsList.map((album) => (
+                    <AlbumCard album={album} key={album.id} />
+                ))}
+            </div>
         </div>
     );
 }
