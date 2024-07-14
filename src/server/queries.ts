@@ -86,3 +86,23 @@ export async function deleteAlbum(id: string) {
         where: { id },
     });
 }
+
+export async function getAlbum(id: string) {
+    return await prisma.album.findUnique({
+        where: { id },
+        include: {
+            artists: true,
+            images: true,
+            tracks: true,
+        },
+    });
+}
+
+export async function updateAlbum(id: string, rating: string) {
+    return await prisma.album.update({
+        where: { id },
+        data: {
+            rating,
+        },
+    });
+}

@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import { ChevronDown, ChevronUp } from "./ui/Svgs";
 import { TTrack } from "@/types/types";
@@ -20,7 +21,7 @@ export const Track = ({ track }: TrackProps) => {
 
     return (
         <div
-            className={`flex flex-col justify-between gap-2 p-2 rounded hover:bg-zinc-100 text-black ${
+            className={`flex flex-col justify-between gap-2 p-2 rounded hover:bg-zinc-100 hover:cursor-pointer text-black ${
                 open && "bg-white"
             }`}
         >

@@ -27,7 +27,7 @@ export default async function RootLayout({
                 <body className={inter.className}>
                     <Providers>
                         <Header />
-                        <main className="flex min-h-screen flex-col items-center justify-between p-24">
+                        <main className="flex min-h-screen flex-col items-center justify-between text-black overflow-hidden">
                             {children}
                         </main>
                     </Providers>

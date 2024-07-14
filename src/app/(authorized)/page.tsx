@@ -1,4 +1,4 @@
-import { AlbumCard } from "@/components/AlbumCard";
+import { DesktopCard } from "@/components/AlbumCardDesktop";
 import { createUser, getSavedAlbums, getUser } from "@/server/queries";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
@@ -24,11 +24,11 @@ export default async function Home() {
     }
 
     return (
-        <div>
+        <div className="mt-16">
             <h1>Home Page</h1>
             <div className="flex flex-col w-full max-w-screen-xl gap-4 px-4 py-4 sm:grid sm:grid-cols-2 lg:grid-cols-3">
                 {albumsList.map((album) => (
-                    <AlbumCard album={album} key={album.id} />
+                    <DesktopCard album={album} key={album.id} />
                 ))}
             </div>
         </div>

@@ -8,7 +8,7 @@ import Image from "next/image";
 import { deleteAlbum } from "@/server/queries";
 import { useRouter } from "next/navigation";
 
-export const AlbumCard = ({ album }: { album: TAlbum }) => {
+export const MobileCard = ({ album }: { album: TAlbum }) => {
     const router = useRouter();
     const [rating, setRating] = useState(album.rating);
     const [open, setOpen] = useState(false);

@@ -4,16 +4,19 @@ import { useSession } from "next-auth/react";
 import { Profile } from "./Profile";
 import { Wavvve } from "./ui/Svgs";
 import { SearchBar } from "./SearchBar";
+import Link from "next/link";
 
 export const Header = () => {
     const { data: session } = useSession();
 
     if (session) {
         return (
-            <header className="relative flex justify-center w-full h-16 p-2 bg-zinc-100">
-                <div className="flex items-center justify-between w-full max-w-screen-xl gap-2 xl:px-4">
+            <header className="absolute z-10 flex justify-center w-full h-16 p-2 bg-zinc-100">
+                <div className="flex items-center justify-between w-full max-w-screen-xl gap-2 xl:px-4 relative">
                     <div className="flex items-center h-full">
-                        <Wavvve />
+                        <Link href={"/"}>
+                            <Wavvve />
+                        </Link>
                     </div>
                     <div className="flex justify-center w-full">
                         <SearchBar />
