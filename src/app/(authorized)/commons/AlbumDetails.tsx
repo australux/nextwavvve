@@ -15,10 +15,10 @@ export const AlbumDetails = ({ album }: { album: TAlbum }) => {
     }
 
     return (
-        <div className="h-full flex flex-col gap-6 overflow-hidden">
+        <div className="h-full flex flex-col gap-4 lg:gap-6 overflow-hidden">
             <div className="flex flex-col">
-                <p className="text-[32px] font-bold">{album.name}</p>
-                <p className="text-lg font-medium">
+                <p className="text-xl lg:text-[32px] font-bold">{album.name}</p>
+                <p className="lg:text-lg font-medium">
                     {album.artists.length > 1 ? (
                         album.artists.map((artist, i) =>
                             i == album.artists.length - 1 ? (
@@ -33,7 +33,7 @@ export const AlbumDetails = ({ album }: { album: TAlbum }) => {
                 </p>
             </div>
             <div className="flex flex-col gap-4 overflow-hidden">
-                <p className="hidden text-zinc-600 font-medium lg:block">
+                <p className="text-sm lg:text-base text-zinc-600 font-medium">
                     Rating
                 </p>
                 <Selector value={rating} handleRating={handleRating} />

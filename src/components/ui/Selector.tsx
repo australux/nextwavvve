@@ -7,7 +7,7 @@ export const Selector = ({ value, handleRating }: SelectorProps) => {
     return (
         <div className="flex gap-2">
             <div
-                className={`font-black text-2xl px-1 hover:cursor-pointer ${
+                className={`font-black text-lg lg:text-2xl px-1 hover:cursor-pointer ${
                     value === "F"
                         ? "text-orange-400"
                         : "text-zinc-400 hover:text-zinc-500"
@@ -18,7 +18,7 @@ export const Selector = ({ value, handleRating }: SelectorProps) => {
                 F
             </div>
             <div
-                className={`font-black text-2xl px-1 hover:cursor-pointer ${
+                className={`font-black text-lg lg:text-2xl px-1 hover:cursor-pointer ${
                     value === "E"
                         ? "text-orange-400"
                         : "text-zinc-400 hover:text-zinc-500"
@@ -29,7 +29,7 @@ export const Selector = ({ value, handleRating }: SelectorProps) => {
                 E
             </div>
             <div
-                className={`font-black text-2xl px-1 hover:cursor-pointer ${
+                className={`font-black text-lg lg:text-2xl px-1 hover:cursor-pointer ${
                     value === "D"
                         ? "text-orange-400"
                         : "text-zinc-400 hover:text-zinc-500"
@@ -40,7 +40,7 @@ export const Selector = ({ value, handleRating }: SelectorProps) => {
                 D
             </div>
             <div
-                className={`font-black text-2xl px-1 hover:cursor-pointer ${
+                className={`font-black text-lg lg:text-2xl px-1 hover:cursor-pointer ${
                     value === "C"
                         ? "text-orange-400"
                         : "text-zinc-400 hover:text-zinc-500"
@@ -51,7 +51,7 @@ export const Selector = ({ value, handleRating }: SelectorProps) => {
                 C
             </div>
             <div
-                className={`font-black text-2xl px-1 hover:cursor-pointer ${
+                className={`font-black text-lg lg:text-2xl px-1 hover:cursor-pointer ${
                     value === "B"
                         ? "text-orange-400"
                         : "text-zinc-400 hover:text-zinc-500"
@@ -62,7 +62,7 @@ export const Selector = ({ value, handleRating }: SelectorProps) => {
                 B
             </div>
             <div
-                className={`font-black text-2xl px-1 hover:cursor-pointer ${
+                className={`font-black text-lg lg:text-2xl px-1 hover:cursor-pointer ${
                     value === "A"
                         ? "text-orange-400"
                         : "text-zinc-400 hover:text-zinc-500"
@@ -73,7 +73,7 @@ export const Selector = ({ value, handleRating }: SelectorProps) => {
                 A
             </div>
             <div
-                className={`font-black text-2xl px-1 hover:cursor-pointer ${
+                className={`font-black text-lg lg:text-2xl px-1 hover:cursor-pointer ${
                     value === "S"
                         ? "text-orange-400"
                         : "text-zinc-400 hover:text-zinc-500"

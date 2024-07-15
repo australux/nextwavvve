@@ -12,7 +12,6 @@ import Link from "next/link";
 export const DesktopCard = ({ album }: { album: TAlbum }) => {
     const router = useRouter();
     const [rating, setRating] = useState(album.rating);
-    const [open, setOpen] = useState(false);
 
     async function handleDelete(id: string) {
         await deleteAlbum(id);
@@ -21,18 +20,12 @@ export const DesktopCard = ({ album }: { album: TAlbum }) => {
 
     return (
         <Link href={`/album/${album.id}`}>
-            <div className="relative flex flex-col gap-2 p-2 bg-white hover:shadow-md">
+            <div className="relative hidden sm:flex flex-col gap-2 p-2 bg-white hover:shadow-md">
                 <div className="flex items-start justify-between w-full">
                     <div className="flex items-center gap-2">
                         <div className="h-10 w-10 bg-black flex items-center justify-center rounded">
                             {rating && (
-                                <p
-                                    className={
-                                        !open
-                                            ? "text-2xl font-black text-orange-400 opacity-100 transition-opacity duration-300"
-                                            : "opacity-0"
-                                    }
-                                >
+                                <p className="text-2xl font-black text-orange-400 opacity-100 transition-opacity duration-300">
                                     {album.rating !== "G" ? album.rating : ""}
                                 </p>
                             )}

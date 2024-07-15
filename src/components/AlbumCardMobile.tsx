@@ -3,15 +3,19 @@
 import { TAlbum } from "@/types/types";
 import { useState } from "react";
 import { Button } from "./ui/Button";
-import { X } from "./ui/Svgs";
+import { ChevronDown, ChevronUp, X } from "./ui/Svgs";
 import Image from "next/image";
 import { deleteAlbum } from "@/server/queries";
 import { useRouter } from "next/navigation";
+import { Selector } from "./ui/Selector";
+import { Pill } from "./ui/Pill";
+import { Track } from "./Track";
 
 export const MobileCard = ({ album }: { album: TAlbum }) => {
     const router = useRouter();
-    const [rating, setRating] = useState(album.rating);
-    const [open, setOpen] = useState(false);
+    const [rating, setRating] = useState<string | undefined>(album.rating);
+    const [open, setOpen] = useState<boolean>(false);
+    const [toggle, setToggle] = useState<boolean>(false);
 
     async function handleDelete(id: string) {
         await deleteAlbum(id);
@@ -19,16 +23,16 @@ export const MobileCard = ({ album }: { album: TAlbum }) => {
     }
 
     return (
-        <div>
+        <div className="sm:hidden">
             <div className="relative flex flex-col gap-2 p-2 bg-white hover:shadow-md">
                 <div className="flex items-start justify-between w-full">
                     <div className="flex items-center gap-2">
-                        <div className="h-9 w-9 border border-zinc-600 flex items-center justify-center rounded">
+                        <div className="h-10 w-10 bg-black flex items-center justify-center rounded">
                             {rating && (
                                 <p
                                     className={
                                         !open
-                                            ? "text-lg font-black text-orange-400 opacity-100 transition-opacity duration-300"
+                                            ? "text-2xl font-black text-orange-400 opacity-100 transition-opacity duration-300"
                                             : "opacity-0"
                                     }
                                 >
@@ -70,6 +74,52 @@ export const MobileCard = ({ album }: { album: TAlbum }) => {
                         width={600}
                         className="object-cover w-full h-full"
                     />
+                </div>
+                <div
+                    className={
+                        open
+                            ? "flex flex-col gap-2 p-2 rounded bg-zinc-50 w-full md:hidden max-h-full opacity-100 transition-all duration-300"
+                            : "opacity-0 max-h-0"
+                    }
+                >
+                    <p className="text-sm text-zinc-600">Rating</p>
+                    <Selector value={rating} />
+                    <div className="flex gap-2">
+                        <Pill
+                            toggle={toggle}
+                            handleToggle={() => setToggle(!toggle)}
+                        >
+                            songs{" "}
+                            {toggle ? (
+                                <ChevronUp className="w-4 h-4 stroke-2" />
+                            ) : (
+                                <ChevronDown className="w-4 h-4 stroke-2" />
+                            )}
+                        </Pill>
+                    </div>
+                    {toggle && (
+                        <div className="flex flex-col w-full gap-2 text-xs md:text-sm">
+                            <div className="flex justify-between w-full px-2 pb-2 border-b text-zinc-400 border-zinc-400">
+                                <p>Title</p>
+                                <p>Rating</p>
+                            </div>
+                            {album.tracks.map((track) => (
+                                <Track track={track} key={track.id} />
+                            ))}
+                        </div>
+                    )}
+                </div>
+                <div
+                    className="z-10 flex justify-end w-full h-full"
+                    onClick={() => setOpen(!open)}
+                >
+                    <Button variant="icon">
+                        {open ? (
+                            <ChevronUp className="w-4 h-4 text-black stroke-2" />
+                        ) : (
+                            <ChevronDown className="w-4 h-4 text-black stroke-2" />
+                        )}
+                    </Button>
                 </div>
             </div>
         </div>
