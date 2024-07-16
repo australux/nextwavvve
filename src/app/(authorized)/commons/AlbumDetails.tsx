@@ -8,14 +8,14 @@ import { useState } from "react";
 export const AlbumDetails = ({ album }: { album: TAlbum }) => {
     const [rating, setRating] = useState(album.rating);
 
-    async function handleRating(e: React.MouseEvent) {
+    async function handleAlbumRating(e: React.MouseEvent) {
         const newRating = e.currentTarget.id;
         await updateAlbum(album.id, newRating);
         setRating(newRating);
     }
 
     return (
-        <div className="h-full flex flex-col gap-4 lg:gap-6 overflow-hidden">
+        <div className="h-full w-full shrink flex flex-col gap-4 lg:gap-6 overflow-hidden">
             <div className="flex flex-col">
                 <p className="text-xl lg:text-[32px] font-bold">{album.name}</p>
                 <p className="lg:text-lg font-medium">
@@ -36,7 +36,7 @@ export const AlbumDetails = ({ album }: { album: TAlbum }) => {
                 <p className="text-sm lg:text-base text-zinc-600 font-medium">
                     Rating
                 </p>
-                <Selector value={rating} handleRating={handleRating} />
+                <Selector value={rating} handleRating={handleAlbumRating} />
                 <div className="flex flex-col w-full gap-2 overflow-hidden text-sm">
                     <div className="flex justify-between w-full px-2 pb-2 border-b border-zinc-400 text-zinc-400">
                         <p>Title</p>

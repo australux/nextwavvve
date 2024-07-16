@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Button } from "./ui/Button";
 import { ChevronDown, ChevronUp, X } from "./ui/Svgs";
 import Image from "next/image";
-import { deleteAlbum } from "@/server/queries";
+import { deleteAlbum, updateAlbum } from "@/server/queries";
 import { useRouter } from "next/navigation";
 import { Selector } from "./ui/Selector";
 import { Pill } from "./ui/Pill";
@@ -22,6 +22,12 @@ export const MobileCard = ({ album }: { album: TAlbum }) => {
         router.refresh();
     }
 
+    async function handleAlbumRating(e: React.MouseEvent) {
+        const newRating = e.currentTarget.id;
+        await updateAlbum(album.id, newRating);
+        setRating(newRating);
+    }
+
     return (
         <div className="sm:hidden">
             <div className="relative flex flex-col gap-2 p-2 bg-white hover:shadow-md">
@@ -36,7 +42,7 @@ export const MobileCard = ({ album }: { album: TAlbum }) => {
                                             : "opacity-0"
                                     }
                                 >
-                                    {album.rating !== "G" ? album.rating : ""}
+                                    {album.rating !== "G" ? rating : ""}
                                 </p>
                             )}
                         </div>
@@ -63,7 +69,7 @@ export const MobileCard = ({ album }: { album: TAlbum }) => {
                         onClick={() => handleDelete(album.id)}
                         variant="icon"
                     >
-                        <X className="w-4 h-4 text-black stroke-2" />
+                        <X className="w-5 text-black stroke-2" />
                     </Button>
                 </div>
                 <div className="flex items-center justify-center w-full h-full overflow-hidden rounded aspect-custom">
@@ -83,7 +89,7 @@ export const MobileCard = ({ album }: { album: TAlbum }) => {
                     }
                 >
                     <p className="text-sm text-zinc-600">Rating</p>
-                    <Selector value={rating} />
+                    <Selector value={rating} handleRating={handleAlbumRating} />
                     <div className="flex gap-2">
                         <Pill
                             toggle={toggle}
@@ -91,9 +97,9 @@ export const MobileCard = ({ album }: { album: TAlbum }) => {
                         >
                             songs{" "}
                             {toggle ? (
-                                <ChevronUp className="w-4 h-4 stroke-2" />
+                                <ChevronUp className="w-5 stroke-2" />
                             ) : (
-                                <ChevronDown className="w-4 h-4 stroke-2" />
+                                <ChevronDown className="w-5 stroke-2" />
                             )}
                         </Pill>
                     </div>
@@ -115,9 +121,9 @@ export const MobileCard = ({ album }: { album: TAlbum }) => {
                 >
                     <Button variant="icon">
                         {open ? (
-                            <ChevronUp className="w-4 h-4 text-black stroke-2" />
+                            <ChevronUp className="w-5 text-black stroke-2" />
                         ) : (
-                            <ChevronDown className="w-4 h-4 text-black stroke-2" />
+                            <ChevronDown className="w-5 text-black stroke-2" />
                         )}
                     </Button>
                 </div>

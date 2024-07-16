@@ -106,3 +106,12 @@ export async function updateAlbum(id: string, rating: string) {
         },
     });
 }
+
+export async function updateTrack(id: string, rating: string) {
+    return await prisma.track.update({
+        where: { id },
+        data: {
+            rating,
+        },
+    });
+}

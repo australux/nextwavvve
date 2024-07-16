@@ -19,11 +19,11 @@ export const DesktopCard = ({ album }: { album: TAlbum }) => {
     }
 
     return (
-        <Link href={`/album/${album.id}`}>
-            <div className="relative hidden sm:flex flex-col gap-2 p-2 bg-white hover:shadow-md">
-                <div className="flex items-start justify-between w-full">
+        <div className="relative hidden sm:flex flex-col gap-2 p-2 pb-8 bg-white hover:shadow-md">
+            <div className="flex items-start justify-between w-full">
+                <Link href={`/album/${album.id}`}>
                     <div className="flex items-center gap-2">
-                        <div className="h-10 w-10 bg-black flex items-center justify-center rounded">
+                        <div className="h-10 w-10 bg-zinc-800 flex items-center justify-center rounded">
                             {rating && (
                                 <p className="text-2xl font-black text-orange-400 opacity-100 transition-opacity duration-300">
                                     {album.rating !== "G" ? album.rating : ""}
@@ -49,14 +49,17 @@ export const DesktopCard = ({ album }: { album: TAlbum }) => {
                             </p>
                         </div>
                     </div>
-                    <Button
-                        onClick={() => handleDelete(album.id)}
-                        variant="icon"
-                    >
-                        <X className="w-4 h-4 text-black stroke-2" />
-                    </Button>
-                </div>
-                <div className="flex items-center justify-center w-full h-full overflow-hidden rounded aspect-custom">
+                </Link>
+                <Button
+                    onClick={() => handleDelete(album.id)}
+                    variant="icon"
+                    className="z-10"
+                >
+                    <X className="w-5 text-black stroke-2" />
+                </Button>
+            </div>
+            <div className="flex items-center justify-center w-full h-full overflow-hidden rounded aspect-custom">
+                <Link href={`/album/${album.id}`}>
                     <Image
                         src={album.images[0].url}
                         alt={album.id}
@@ -64,8 +67,8 @@ export const DesktopCard = ({ album }: { album: TAlbum }) => {
                         width={600}
                         className="object-cover w-full h-full"
                     />
-                </div>
+                </Link>
             </div>
-        </Link>
+        </div>
     );
 };

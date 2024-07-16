@@ -92,7 +92,7 @@ export const SearchBar = () => {
                                 className="p-1 shadow-none"
                                 onClick={() => setInputValue("")}
                             >
-                                <X className="w-6 text-zinc-600" />
+                                <X className="w-5 text-zinc-600" />
                             </Button>
                         </div>
                     )}

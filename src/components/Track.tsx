@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { ChevronDown, ChevronUp } from "./ui/Svgs";
 import { TTrack } from "@/types/types";
-// import { useLocalStorage } from "@/hooks/useLocalStorage";
+import { updateTrack } from "@/server/queries";
 
 type TrackProps = {
     track: TTrack;
@@ -11,11 +11,10 @@ type TrackProps = {
 export const Track = ({ track }: TrackProps) => {
     const [rating, setRating] = useState(track.rating);
     const [open, setOpen] = useState(false);
-    // const { updateItem } = useLocalStorage("saved_albums");
 
-    function handleRating(e: React.MouseEvent) {
+    async function handleRating(e: React.MouseEvent) {
         const newRating = e.currentTarget.id;
-        // updateItem(track.id, newRating);
+        await updateTrack(track.id, newRating);
         setRating(newRating);
     }
 
@@ -34,13 +33,13 @@ export const Track = ({ track }: TrackProps) => {
                     {open ? (
                         <ChevronUp
                             className={`w-4 h-4 stroke-2 ${
-                                rating && "text-orange-400"
+                                rating !== "G" && "text-orange-400"
                             }`}
                         />
                     ) : (
                         <ChevronDown
                             className={`w-4 h-4 stroke-2 ${
-                                rating && "text-orange-400"
+                                rating !== "G" && "text-orange-400"
                             }`}
                         />
                     )}

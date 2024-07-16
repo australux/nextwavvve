@@ -16,8 +16,10 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({
     children,
+    modal,
 }: Readonly<{
     children: React.ReactNode;
+    modal: React.ReactNode;
 }>) {
     const session = await getServerSession(authOptions);
 
@@ -26,10 +28,14 @@ export default async function RootLayout({
             <AuthSessionProvider session={session}>
                 <body className={inter.className}>
                     <Providers>
-                        <Header />
-                        <main className="flex min-h-screen flex-col items-center justify-between text-black overflow-hidden">
-                            {children}
-                        </main>
+                        <div className="flex min-h-screen flex-col items-center justify-between overflow-hidden text-black">
+                            <Header />
+                            <main className="overflow-hidden">
+                                {children}
+                                {modal}
+                                <div id="modal-root" />
+                            </main>
+                        </div>
                     </Providers>
                 </body>
             </AuthSessionProvider>
