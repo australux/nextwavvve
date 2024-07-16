@@ -25,7 +25,7 @@ const buttonVariants = cva(
             variant: {
                 dark: "bg-zinc-950 hover:bg-zinc-800 text-white",
                 light: "bg-white hover:bg-zinc-100 text-black",
-                icon: "p-1 rounded-full bg-zinc-100 opacity-75 shadow-none hover:bg-zinc-200 hover:opacity-100 hover:shadow",
+                icon: "p-1 rounded-full bg-card-accent-1 opacity-75 shadow-none hover:bg-card-accent-2 hover:opacity-100 hover:shadow",
             },
         },
         defaultVariants: {

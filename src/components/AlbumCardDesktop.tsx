@@ -19,11 +19,11 @@ export const DesktopCard = ({ album }: { album: TAlbum }) => {
     }
 
     return (
-        <div className="relative hidden sm:flex flex-col gap-2 p-2 pb-8 bg-white hover:shadow-md">
+        <div className="relative hidden sm:flex flex-col gap-2 p-2 pb-8 bg-card-base hover:shadow-md">
             <div className="flex items-start justify-between w-full">
                 <Link href={`/album/${album.id}`}>
                     <div className="flex items-center gap-2">
-                        <div className="h-10 w-10 bg-zinc-800 flex items-center justify-center rounded">
+                        <div className="h-10 w-10 bg-card-deco flex items-center justify-center rounded">
                             {rating && (
                                 <p className="text-2xl font-black text-orange-400 opacity-100 transition-opacity duration-300">
                                     {album.rating !== "G" ? album.rating : ""}
@@ -31,10 +31,10 @@ export const DesktopCard = ({ album }: { album: TAlbum }) => {
                             )}
                         </div>
                         <div className="flex flex-col">
-                            <p className="font-bold text-black line-clamp-1">
+                            <p className="font-bold line-clamp-1">
                                 {album.name}
                             </p>
-                            <p className="text-sm font-medium text-black line-clamp-1">
+                            <p className="text-sm font-medium line-clamp-1">
                                 {album.artists.length > 1 ? (
                                     album.artists.map((artist, i) =>
                                         i == album.artists.length - 1 ? (
@@ -55,7 +55,7 @@ export const DesktopCard = ({ album }: { album: TAlbum }) => {
                     variant="icon"
                     className="z-10"
                 >
-                    <X className="w-5 text-black stroke-2" />
+                    <X className="w-5 stroke-2" />
                 </Button>
             </div>
             <div className="flex items-center justify-center w-full h-full overflow-hidden rounded aspect-custom">
@@ -65,6 +65,7 @@ export const DesktopCard = ({ album }: { album: TAlbum }) => {
                         alt={album.id}
                         height={600}
                         width={600}
+                        priority={true}
                         className="object-cover w-full h-full"
                     />
                 </Link>

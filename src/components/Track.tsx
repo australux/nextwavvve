@@ -20,8 +20,8 @@ export const Track = ({ track }: TrackProps) => {
 
     return (
         <div
-            className={`flex flex-col justify-between gap-2 p-2 rounded hover:bg-zinc-100 hover:cursor-pointer text-black ${
-                open && "bg-white"
+            className={`flex flex-col justify-between gap-2 p-2 rounded hover:bg-card-accent-1 hover:cursor-pointer ${
+                open && "bg-card-base"
             }`}
         >
             <div

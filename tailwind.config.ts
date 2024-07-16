@@ -12,9 +12,21 @@ const config: Config = {
                 "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
                 "gradient-conic":
                     "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+                frosted:
+                    "linear-gradient(to bottom, rgba(var(--background-frost)), transparent)",
             },
             aspectRatio: {
                 custom: "3 / 2",
+            },
+            colors: {
+                card: {
+                    base: "rgb(var(--gradient-end))",
+                    secondary: "rgb(var(--background-secondary))",
+                    "accent-1": "rgb(var(--accent-primary))",
+                    "accent-2": "rgb(var(--accent-secondary))",
+                    deco: "rgb(var(--deco-base))",
+                    text: "rgb(var(--text-base))",
+                },
             },
         },
     },

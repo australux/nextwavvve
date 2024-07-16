@@ -30,10 +30,10 @@ export const MobileCard = ({ album }: { album: TAlbum }) => {
 
     return (
         <div className="sm:hidden">
-            <div className="relative flex flex-col gap-2 p-2 bg-white hover:shadow-md">
+            <div className="relative flex flex-col gap-2 p-2 bg-card-base hover:shadow-md">
                 <div className="flex items-start justify-between w-full">
                     <div className="flex items-center gap-2">
-                        <div className="h-10 w-10 bg-black flex items-center justify-center rounded">
+                        <div className="h-10 w-10 bg-card-deco flex items-center justify-center rounded">
                             {rating && (
                                 <p
                                     className={
@@ -47,10 +47,10 @@ export const MobileCard = ({ album }: { album: TAlbum }) => {
                             )}
                         </div>
                         <div className="flex flex-col">
-                            <p className="font-bold text-black line-clamp-1">
+                            <p className="font-bold line-clamp-1">
                                 {album.name}
                             </p>
-                            <p className="text-sm font-medium text-black line-clamp-1">
+                            <p className="text-sm font-medium line-clamp-1">
                                 {album.artists.length > 1 ? (
                                     album.artists.map((artist, i) =>
                                         i == album.artists.length - 1 ? (
@@ -69,7 +69,7 @@ export const MobileCard = ({ album }: { album: TAlbum }) => {
                         onClick={() => handleDelete(album.id)}
                         variant="icon"
                     >
-                        <X className="w-5 text-black stroke-2" />
+                        <X className="w-5 stroke-2" />
                     </Button>
                 </div>
                 <div className="flex items-center justify-center w-full h-full overflow-hidden rounded aspect-custom">
@@ -78,13 +78,14 @@ export const MobileCard = ({ album }: { album: TAlbum }) => {
                         alt={album.id}
                         height={600}
                         width={600}
+                        priority={true}
                         className="object-cover w-full h-full"
                     />
                 </div>
                 <div
                     className={
                         open
-                            ? "flex flex-col gap-2 p-2 rounded bg-zinc-50 w-full md:hidden max-h-full opacity-100 transition-all duration-300"
+                            ? "flex flex-col gap-2 p-2 rounded bg-card-secondary w-full md:hidden max-h-full opacity-100 transition-all duration-300"
                             : "opacity-0 max-h-0"
                     }
                 >
@@ -121,9 +122,9 @@ export const MobileCard = ({ album }: { album: TAlbum }) => {
                 >
                     <Button variant="icon">
                         {open ? (
-                            <ChevronUp className="w-5 text-black stroke-2" />
+                            <ChevronUp className="w-5 stroke-2" />
                         ) : (
-                            <ChevronDown className="w-5 text-black stroke-2" />
+                            <ChevronDown className="w-5 stroke-2" />
                         )}
                     </Button>
                 </div>

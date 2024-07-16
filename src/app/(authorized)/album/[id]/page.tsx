@@ -6,7 +6,7 @@ export default function AlbumPage({
     params: { id: string };
 }) {
     return (
-        <div className="h-screen w-screen flex items-center justify-center bg-white">
+        <div className="h-screen w-screen flex items-center justify-center">
             <FullPageAlbumView albumId={albumId} />
         </div>
     );

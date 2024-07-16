@@ -30,8 +30,8 @@ const inputVariants = cva(
     {
         variants: {
             variant: {
-                dark: "text-white border-zinc-600 focus-visible:ring-zinc-600",
-                light: "text-black border-zinc-400 focus-visible:ring-zinc-400",
+                dark: "border-zinc-600 focus-visible:ring-zinc-600",
+                light: "border-zinc-400 focus-visible:ring-zinc-400",
             },
         },
         defaultVariants: {

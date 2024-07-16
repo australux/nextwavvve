@@ -29,7 +29,7 @@ export default async function Home() {
     return (
         <div className="mt-16">
             <h1>Home Page</h1>
-            <div className="flex flex-col w-full max-w-screen-xl gap-4 px-4 py-4 sm:grid sm:grid-cols-2 lg:grid-cols-3">
+            <div className="flex flex-col w-full max-w-screen-xl gap-4 px-4 md:px-2 py-4 sm:grid sm:grid-cols-2 lg:grid-cols-3">
                 {albumsList.map((album) => (
                     <div key={album.id}>
                         <MobileCard album={album} />

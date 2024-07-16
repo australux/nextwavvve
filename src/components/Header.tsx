@@ -11,9 +11,9 @@ export const Header = () => {
 
     if (session) {
         return (
-            <header className="fixed z-40 flex justify-center w-full h-16 p-2 bg-zinc-100">
+            <header className="fixed z-40 flex justify-center w-full h-16 p-2 bg-frosted">
                 <div className="flex items-center justify-between w-full max-w-screen-xl gap-2 xl:px-4 relative -left-2">
-                    <div className="flex items-center h-full">
+                    <div className="flex items-center w-fit">
                         <Link href={"/"}>
                             <Wavvve />
                         </Link>
