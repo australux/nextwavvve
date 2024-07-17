@@ -1,13 +1,18 @@
-import { DesktopCard } from "@/components/AlbumCardDesktop";
-import { MobileCard } from "@/components/AlbumCardMobile";
 import { createUser, getSavedAlbums, getUser } from "@/server/queries";
+import {
+    dehydrate,
+    HydrationBoundary,
+    QueryClient,
+    useQuery,
+} from "@tanstack/react-query";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-
-export const dynamic = "force-dynamic";
+import Albums from "./commons/albums";
 
 export default async function Home() {
     const session = await getServerSession();
+    const queryClient = new QueryClient();
+
     if (!session || !session.user) {
         redirect("/login");
     }
@@ -21,22 +26,24 @@ export default async function Home() {
         await createUser({ name, image, email });
     }
 
-    const albumsList = await getSavedAlbums();
-    if (!albumsList) {
-        return null;
+    await queryClient.prefetchQuery({
+        queryKey: ["savedAlbums"],
+        queryFn: fetchAlbums,
+    });
+
+    async function fetchAlbums() {
+        try {
+            const res = await getSavedAlbums();
+            return res;
+        } catch (error) {
+            console.error(error);
+            throw new Error("Error fetching albums");
+        }
     }
 
     return (
-        <div className="mt-16">
-            <h1>Home Page</h1>
-            <div className="flex flex-col w-full max-w-screen-xl gap-4 px-4 md:px-2 py-4 sm:grid sm:grid-cols-2 lg:grid-cols-3">
-                {albumsList.map((album) => (
-                    <div key={album.id}>
-                        <MobileCard album={album} />
-                        <DesktopCard album={album} />
-                    </div>
-                ))}
-            </div>
-        </div>
+        <HydrationBoundary state={dehydrate(queryClient)}>
+            <Albums />
+        </HydrationBoundary>
     );
 }

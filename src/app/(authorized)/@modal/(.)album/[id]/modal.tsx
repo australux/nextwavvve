@@ -2,12 +2,14 @@
 
 import { Button } from "@/components/ui/Button";
 import { X } from "@/components/ui/Svgs";
+import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { ElementRef, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 
 export function Modal({ children }: { children: React.ReactNode }) {
     const router = useRouter();
+    const queryClient = useQueryClient();
     const dialogRef = useRef<ElementRef<"dialog">>(null);
 
     useEffect(() => {
@@ -17,6 +19,7 @@ export function Modal({ children }: { children: React.ReactNode }) {
     }, []);
 
     function onDismiss() {
+        queryClient.invalidateQueries("savedAlbums");
         router.back();
     }
 
