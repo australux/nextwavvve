@@ -37,6 +37,7 @@ export const Profile = () => {
                                 <Link
                                     href={"/dashboard"}
                                     className="flex items-center gap-4 hover:bg-card-secondary p-2 rounded w-full"
+                                    onClick={() => setOpen(false)}
                                 >
                                     <div className="flex items-end justify-center h-[40px] overflow-hidden rounded-full bg-zinc-600 aspect-square">
                                         <Image
@@ -50,7 +51,7 @@ export const Profile = () => {
                                         {session.user.name}
                                     </p>
                                 </Link>
-                                <Button variant="icon">
+                                <Button variant="icon" onClick={handleOpen}>
                                     <X className="stroke-2 w-6" />
                                 </Button>
                             </div>

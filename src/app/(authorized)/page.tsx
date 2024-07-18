@@ -3,7 +3,6 @@ import {
     dehydrate,
     HydrationBoundary,
     QueryClient,
-    useQuery,
 } from "@tanstack/react-query";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";

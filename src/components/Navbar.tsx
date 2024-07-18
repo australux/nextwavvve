@@ -1,6 +1,5 @@
 import { ElementRef, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
-import { Button } from "./ui/Button";
 
 export function Navbar({
     children,
@@ -25,7 +24,8 @@ export function Navbar({
         <dialog
             ref={navRef}
             onClose={onDismiss}
-            className="h-screen w-screen md:w-80 text-card-text bg-card-base md:rounded border border-zinc-600 mr-0"
+            onClick={(e) => e.stopPropagation()}
+            className="h-screen w-screen md:w-80 text-card-text bg-card-base md:rounded border border-zinc-600"
         >
             {children}
         </dialog>,

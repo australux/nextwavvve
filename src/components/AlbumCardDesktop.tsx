@@ -19,7 +19,7 @@ export const DesktopCard = ({ album }: { album: TAlbum }) => {
     }
 
     return (
-        <div className="relative hidden sm:flex flex-col gap-2 p-2 pb-8 bg-card-base hover:shadow-md">
+        <nav className="relative hidden sm:flex flex-col gap-2 p-2 pb-8 bg-card-base hover:shadow-md">
             <div className="flex items-start justify-between w-full">
                 <Link href={`/album/${album.id}`} prefetch={true}>
                     <div className="flex items-center gap-2">
@@ -70,6 +70,6 @@ export const DesktopCard = ({ album }: { album: TAlbum }) => {
                     />
                 </Link>
             </div>
-        </div>
+        </nav>
     );
 };
