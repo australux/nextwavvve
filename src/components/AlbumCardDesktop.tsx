@@ -21,7 +21,7 @@ export const DesktopCard = ({ album }: { album: TAlbum }) => {
     return (
         <div className="relative hidden sm:flex flex-col gap-2 p-2 pb-8 bg-card-base hover:shadow-md">
             <div className="flex items-start justify-between w-full">
-                <Link href={`/album/${album.id}`}>
+                <Link href={`/album/${album.id}`} prefetch={true}>
                     <div className="flex items-center gap-2">
                         <div className="h-10 w-10 bg-card-deco flex items-center justify-center rounded">
                             {rating && (

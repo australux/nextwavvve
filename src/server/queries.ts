@@ -74,6 +74,7 @@ export async function saveAlbum(album: {
                     data: album.tracks,
                 },
             },
+            savedAt: new Date(),
         },
     });
 }

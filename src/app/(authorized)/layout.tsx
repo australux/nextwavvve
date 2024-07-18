@@ -28,12 +28,13 @@ export default async function RootLayout({
             <AuthSessionProvider session={session}>
                 <body className={inter.className}>
                     <Providers>
-                        <div className="flex min-h-screen flex-col items-center justify-between overflow-hidden">
+                        <div className="flex min-h-screen flex-col items-center justify-between antialiased overflow-hidden">
                             <Header />
                             <main className="overflow-hidden">
                                 {children}
                                 {modal}
                                 <div id="modal-root" />
+                                <div id="navbar-root" />
                             </main>
                         </div>
                     </Providers>

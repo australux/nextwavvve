@@ -20,7 +20,7 @@ const config: Config = {
             },
             colors: {
                 card: {
-                    base: "rgb(var(--gradient-end))",
+                    base: "rgb(var(--background-base))",
                     secondary: "rgb(var(--background-secondary))",
                     "accent-1": "rgb(var(--accent-primary))",
                     "accent-2": "rgb(var(--accent-secondary))",
