@@ -26,7 +26,7 @@ Input.displayName = "Input";
 export { Input };
 
 const inputVariants = cva(
-    "px-4 py-2 text-sm transition-colors bg-transparent border rounded-lg focus-visible:outline-none focus-visible:ring-1 disabled:cursor-not-allowed disabled:opacity-50",
+    "px-4 py-2 text transition-colors bg-transparent border rounded-lg focus-visible:outline-none focus-visible:ring-1 disabled:cursor-not-allowed disabled:opacity-50",
     {
         variants: {
             variant: {

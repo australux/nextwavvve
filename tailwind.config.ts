@@ -14,6 +14,8 @@ const config: Config = {
                     "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
                 frosted:
                     "linear-gradient(to bottom, rgba(var(--background-frost)), transparent)",
+                "base-gradient":
+                    "linear-gradient(to bottom, transparent 0%, transparent 80%, rgb(var(--background-base)) 100%)",
             },
             aspectRatio: {
                 custom: "3 / 2",

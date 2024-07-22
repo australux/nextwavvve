@@ -9,10 +9,10 @@ import sdk from "@/lib/spotify-sdk/ClientInstance";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "./ui/Button";
 import { Album } from "@spotify/web-api-ts-sdk";
-import { SuggestionCard } from "./ui/SuggestionCard";
 import { useSession } from "next-auth/react";
 import { handleSelection } from "@/lib/utils";
 import { useRouter } from "next/navigation";
+import { AlbumSuggestion } from "./ui/SuggestionCard";
 
 export const SearchBar = () => {
     const [q, setQ] = useState<string>("");
@@ -69,7 +69,7 @@ export const SearchBar = () => {
     }
 
     return (
-        <div className="w-full max-w-[500px] sm:relative">
+        <div className="w-full max-w-[500px] sm:hidden">
             <form onSubmit={(e) => e.preventDefault()}>
                 <div className="relative flex intems-center gap-2">
                     <label htmlFor="searchbar" hidden></label>
@@ -110,7 +110,7 @@ export const SearchBar = () => {
                                 key={album.id}
                                 onClick={() => handleClick(album.id)}
                             >
-                                <SuggestionCard album={album} />
+                                <AlbumSuggestion album={album} />
                             </ListItem>
                         ))
                     )}

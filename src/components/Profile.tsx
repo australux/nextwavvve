@@ -32,11 +32,11 @@ export const Profile = () => {
                 </div>
                 {open && (
                     <Navbar handleOpen={handleOpen}>
-                        <div className="flex flex-col gap-2 p-2 items-start">
+                        <nav className="flex flex-col gap-2 p-2 items-start">
                             <div className="w-full flex gap-2 justify-between items-start group">
                                 <Link
                                     href={"/dashboard"}
-                                    className="flex items-center gap-4 hover:bg-card-secondary p-2 rounded w-full"
+                                    className="flex items-center gap-4 hover:bg-card-secondary px-2 py-1 rounded w-full"
                                     onClick={() => setOpen(false)}
                                 >
                                     <div className="flex items-end justify-center h-[40px] overflow-hidden rounded-full bg-zinc-600 aspect-square">
@@ -58,7 +58,7 @@ export const Profile = () => {
                             <Button variant="dark" onClick={() => signOut()}>
                                 Logout
                             </Button>
-                        </div>
+                        </nav>
                     </Navbar>
                 )}
             </div>

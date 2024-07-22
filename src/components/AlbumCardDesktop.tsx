@@ -19,18 +19,33 @@ export const DesktopCard = ({ album }: { album: TAlbum }) => {
     }
 
     return (
-        <nav className="relative hidden sm:flex flex-col gap-2 p-2 pb-8 bg-card-base hover:shadow-md">
-            <div className="flex items-start justify-between w-full">
-                <Link href={`/album/${album.id}`} prefetch={true}>
+        <div className="relative hidden sm:block p-2 bg-card-base hover:shadow-md">
+            <Link
+                href={`/album/${album.id}`}
+                prefetch={true}
+                className="flex flex-col gap-2"
+                scroll={false}
+            >
+                <div className="flex items-center justify-center w-full h-full overflow-hidden rounded">
+                    <Image
+                        src={album.images[0].url}
+                        alt={album.id}
+                        height={600}
+                        width={600}
+                        priority={true}
+                        className="object-cover w-full h-full"
+                    />
+                </div>
+                <div className="flex items-start justify-between w-full">
                     <div className="flex items-center gap-2">
-                        <div className="h-10 w-10 bg-card-deco flex items-center justify-center rounded">
+                        <div className="h-10 min-w-10 bg-card-deco flex items-center justify-center rounded">
                             {rating && (
                                 <p className="text-2xl font-black text-orange-400 opacity-100 transition-opacity duration-300">
                                     {album.rating !== "G" ? album.rating : ""}
                                 </p>
                             )}
                         </div>
-                        <div className="flex flex-col">
+                        <div className="flex flex-col w-full">
                             <p className="font-bold line-clamp-1">
                                 {album.name}
                             </p>
@@ -49,7 +64,9 @@ export const DesktopCard = ({ album }: { album: TAlbum }) => {
                             </p>
                         </div>
                     </div>
-                </Link>
+                </div>
+            </Link>
+            <div className="absolute top-3 left-3">
                 <Button
                     onClick={() => handleDelete(album.id)}
                     variant="icon"
@@ -58,18 +75,6 @@ export const DesktopCard = ({ album }: { album: TAlbum }) => {
                     <X className="w-5 stroke-2" />
                 </Button>
             </div>
-            <div className="flex items-center justify-center w-full h-full overflow-hidden rounded aspect-custom">
-                <Link href={`/album/${album.id}`}>
-                    <Image
-                        src={album.images[0].url}
-                        alt={album.id}
-                        height={600}
-                        width={600}
-                        priority={true}
-                        className="object-cover w-full h-full"
-                    />
-                </Link>
-            </div>
-        </nav>
+        </div>
     );
 };

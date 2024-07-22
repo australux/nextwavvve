@@ -89,7 +89,7 @@ export const MobileCard = ({ album }: { album: TAlbum }) => {
                             : "opacity-0 max-h-0"
                     }
                 >
-                    <p className="text-sm text-zinc-600">Rating</p>
+                    <p className="text-sm text-card-text">Rating</p>
                     <Selector value={rating} handleRating={handleAlbumRating} />
                     <div className="flex gap-2">
                         <Pill

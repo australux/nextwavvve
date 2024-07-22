@@ -32,11 +32,12 @@ export default async function RootLayout({
                             <Header />
                             <main className="overflow-hidden">
                                 {children}
-                                {modal}
-                                <div id="modal-root" />
                                 <div id="navbar-root" />
                             </main>
                         </div>
+                        {modal}
+                        <div id="modal-root" />
+                        <div id="search-root" />
                     </Providers>
                 </body>
             </AuthSessionProvider>
