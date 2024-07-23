@@ -76,7 +76,6 @@ export const SearchBar = () => {
                     <Input
                         type="text"
                         id="searchbar"
-                        variant="light"
                         value={inputValue}
                         onChange={handleInput}
                         onBlur={handleBlur}
@@ -86,7 +85,7 @@ export const SearchBar = () => {
                     />
                     <button type="submit" hidden></button>
                     {q && (
-                        <div className="absolute right-1 top-1">
+                        <div className="absolute right-1.5 top-1.5">
                             <Button
                                 variant="icon"
                                 className="p-1 shadow-none"
@@ -99,22 +98,26 @@ export const SearchBar = () => {
                 </div>
             </form>
             {q && (
-                <List>
+                <div className="absolute top-full left-0 bg-white dark:bg-black w-screen h-[calc(100vh_-_3.55rem)] z-50 overflow-hidden">
                     {isLoading ? (
-                        <ListItem>
-                            <Spinner />
-                        </ListItem>
-                    ) : (
-                        results?.albums.items.map((album) => (
-                            <ListItem
-                                key={album.id}
-                                onClick={() => handleClick(album.id)}
-                            >
-                                <AlbumSuggestion album={album} />
+                        <List>
+                            <ListItem>
+                                <Spinner />
                             </ListItem>
-                        ))
+                        </List>
+                    ) : (
+                        <List>
+                            {results?.albums.items.map((album) => (
+                                <ListItem
+                                    key={album.id}
+                                    onClick={() => handleClick(album.id)}
+                                >
+                                    <AlbumSuggestion album={album} />
+                                </ListItem>
+                            ))}
+                        </List>
                     )}
-                </List>
+                </div>
             )}
         </div>
     );

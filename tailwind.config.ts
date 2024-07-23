@@ -14,21 +14,9 @@ const config: Config = {
                     "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
                 frosted:
                     "linear-gradient(to bottom, rgba(var(--background-frost)), transparent)",
-                "base-gradient":
-                    "linear-gradient(to bottom, transparent 0%, transparent 80%, rgb(var(--background-base)) 100%)",
             },
             aspectRatio: {
                 custom: "3 / 2",
-            },
-            colors: {
-                card: {
-                    base: "rgb(var(--background-base))",
-                    secondary: "rgb(var(--background-secondary))",
-                    "accent-1": "rgb(var(--accent-primary))",
-                    "accent-2": "rgb(var(--accent-secondary))",
-                    deco: "rgb(var(--deco-base))",
-                    text: "rgb(var(--text-base))",
-                },
             },
         },
     },

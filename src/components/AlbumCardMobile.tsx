@@ -29,11 +29,21 @@ export const MobileCard = ({ album }: { album: TAlbum }) => {
     }
 
     return (
-        <div className="sm:hidden">
-            <div className="relative flex flex-col gap-2 p-2 bg-card-base hover:shadow-md">
-                <div className="flex items-start justify-between w-full">
+        <div className="relative sm:hidden">
+            <div className="flex flex-col gap-2 p-2 bg-white dark:bg-black hover:shadow-md">
+                <div className="flex items-center justify-center w-full h-full overflow-hidden rounded">
+                    <Image
+                        src={album.images[0].url}
+                        alt={album.id}
+                        height={600}
+                        width={600}
+                        priority={true}
+                        className="object-cover w-full h-full"
+                    />
+                </div>
+                <div className="flex items-end justify-between w-full">
                     <div className="flex items-center gap-2">
-                        <div className="h-10 w-10 bg-card-deco flex items-center justify-center rounded">
+                        <div className="h-10 min-w-10 bg-neutral-800 dark:bg-neutral-100 flex items-center justify-center rounded">
                             {rating && (
                                 <p
                                     className={
@@ -65,31 +75,24 @@ export const MobileCard = ({ album }: { album: TAlbum }) => {
                             </p>
                         </div>
                     </div>
-                    <Button
-                        onClick={() => handleDelete(album.id)}
-                        variant="icon"
-                    >
-                        <X className="w-5 stroke-2" />
-                    </Button>
-                </div>
-                <div className="flex items-center justify-center w-full h-full overflow-hidden rounded aspect-custom">
-                    <Image
-                        src={album.images[0].url}
-                        alt={album.id}
-                        height={600}
-                        width={600}
-                        priority={true}
-                        className="object-cover w-full h-full"
-                    />
+                    <div className="z-10" onClick={() => setOpen(!open)}>
+                        <Button variant="icon">
+                            {open ? (
+                                <ChevronUp className="w-5 stroke-2" />
+                            ) : (
+                                <ChevronDown className="w-5 stroke-2" />
+                            )}
+                        </Button>
+                    </div>
                 </div>
                 <div
                     className={
                         open
-                            ? "flex flex-col gap-2 p-2 rounded bg-card-secondary w-full md:hidden max-h-full opacity-100 transition-all duration-300"
+                            ? "flex flex-col gap-2 p-2 rounded bg-neutral-50 dark:bg-neutral-900 w-full md:hidden max-h-full opacity-100 transition-all duration-300"
                             : "opacity-0 max-h-0"
                     }
                 >
-                    <p className="text-sm text-card-text">Rating</p>
+                    <p className="text-sm">Rating</p>
                     <Selector value={rating} handleRating={handleAlbumRating} />
                     <div className="flex gap-2">
                         <Pill
@@ -116,18 +119,11 @@ export const MobileCard = ({ album }: { album: TAlbum }) => {
                         </div>
                     )}
                 </div>
-                <div
-                    className="z-10 flex justify-end w-full h-full"
-                    onClick={() => setOpen(!open)}
-                >
-                    <Button variant="icon">
-                        {open ? (
-                            <ChevronUp className="w-5 stroke-2" />
-                        ) : (
-                            <ChevronDown className="w-5 stroke-2" />
-                        )}
-                    </Button>
-                </div>
+            </div>
+            <div className="absolute top-3 left-3">
+                <Button onClick={() => handleDelete(album.id)} variant="icon">
+                    <X className="w-5 stroke-2" />
+                </Button>
             </div>
         </div>
     );

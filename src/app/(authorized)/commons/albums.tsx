@@ -30,7 +30,7 @@ export default function Albums() {
 
     return (
         <div className="mt-16">
-            <h1 className="text-4xl font-black pl-4 py-4">
+            <h1 className="text-2xl sm:text-4xl font-black pl-4 py-4">
                 {session?.user?.name?.split(" ")[0]}&apos;s Albums
             </h1>
             <div className="flex flex-col w-full max-w-screen-xl gap-4 px-4 md:px-2 py-4 sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">

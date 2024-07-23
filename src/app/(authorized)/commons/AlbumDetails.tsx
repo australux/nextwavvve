@@ -33,7 +33,7 @@ export const AlbumDetails = ({ album }: { album: TAlbum }) => {
                 </p>
             </div>
             <div className="flex flex-col gap-2 overflow-hidden">
-                <p className="text-sm lg:text-base text-card-text">Rating</p>
+                <p className="text-sm lg:text-base">Rating</p>
                 <Selector value={rating} handleRating={handleAlbumRating} />
                 <div className="flex flex-col w-full gap-2 overflow-hidden text-sm">
                     <div className="flex justify-between w-full px-2 pb-2 border-b border-zinc-400 text-zinc-400">

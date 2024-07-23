@@ -7,7 +7,7 @@ import {
     SdkOptions,
     SpotifyApi,
 } from "@spotify/web-api-ts-sdk";
-import { AuthUser } from "@/app/api/auth/[...nextauth]/route";
+import { AuthUser } from "@/app/api/auth/[...nextauth]/authOptions";
 import { getSession, signIn } from "next-auth/react";
 
 class NextAuthStrategy implements IAuthStrategy {

@@ -3,7 +3,7 @@ import { cva } from "class-variance-authority";
 import { HTMLAttributes } from "react";
 
 type ButtonProps = HTMLAttributes<HTMLButtonElement> & {
-    variant?: "dark" | "light" | "icon";
+    variant?: "primary" | "secondary" | "icon" | "ghost";
     className?: string;
 };
 
@@ -19,17 +19,20 @@ export const Button = ({ variant, className, ...props }: ButtonProps) => {
 };
 
 const buttonVariants = cva(
-    "inline-flex items-center justify-center px-4 py-2 transition-all duration-150 rounded-md shadow text-sm group",
+    "inline-flex items-center justify-center px-4 py-2 gap-1 transition-all duration-150 rounded-md hover:shadow text-sm group",
     {
         variants: {
             variant: {
-                dark: "bg-zinc-950 hover:bg-zinc-800 text-white",
-                light: "bg-white hover:bg-zinc-100 text-black",
-                icon: "p-1 rounded-full bg-card-accent-1 opacity-75 shadow-none hover:bg-card-accent-2 hover:opacity-100 hover:shadow",
+                primary:
+                    "bg-white hover:bg-neutral-100 text-black dark:bg-neutral-950 dark:hover:bg-neutral-800 dark:text-white",
+                secondary:
+                    "bg-transparent hover:bg-neutral-200 dark:hover:bg-neutral-800 border border-neutral-200 dark:border-neutral-800",
+                ghost: "bg-transparent hover:bg-neutral-100 text-black dark:hover:bg-neutral-800 dark:text-white",
+                icon: "p-1 rounded-full bg-neutral-50 opacity-75 dark:bg-neutral-900 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:opacity-100",
             },
         },
         defaultVariants: {
-            variant: "dark",
+            variant: "primary",
         },
     }
 );

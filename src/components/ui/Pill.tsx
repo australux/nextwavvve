@@ -10,7 +10,7 @@ export const Pill = ({ children, toggle, handleToggle }: PillProps) => {
             className={`px-2 py-1 text-xs hover:cursor-pointer rounded-xl transition-colors duration-100 inline-flex items-center gap-2 ${
                 toggle
                     ? "bg-orange-400 text-white"
-                    : "bg-card-base text-zinc-400"
+                    : "bg-white dark:bg-black text-zinc-400"
             }`}
             onClick={handleToggle}
         >

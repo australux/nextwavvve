@@ -25,7 +25,7 @@ export function Navbar({
             ref={navRef}
             onClose={onDismiss}
             onClick={(e) => e.stopPropagation()}
-            className="h-screen w-screen md:w-80 text-card-text bg-card-base md:rounded border border-zinc-600"
+            className="h-screen w-screen md:w-80 text-black bg-white dark:text-white dark:bg-black md:rounded border border-zinc-600"
         >
             {children}
         </dialog>,

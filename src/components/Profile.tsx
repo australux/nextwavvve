@@ -19,7 +19,7 @@ export const Profile = () => {
     if (session?.user) {
         return (
             <div
-                className="flex items-center justify-end gap-2 hover:cursor-pointer ring-2 w-max rounded-full ring-zinc-500"
+                className="flex items-center justify-end gap-2 hover:cursor-pointer w-max rounded-full"
                 onClick={handleOpen}
             >
                 <div className="flex items-end justify-center h-[40px] overflow-hidden rounded-full bg-zinc-600 aspect-square">
@@ -36,7 +36,7 @@ export const Profile = () => {
                             <div className="w-full flex gap-2 justify-between items-start group">
                                 <Link
                                     href={"/dashboard"}
-                                    className="flex items-center gap-4 hover:bg-card-secondary px-2 py-1 rounded w-full"
+                                    className="flex items-center gap-4 hover:bg-neutral-100 dark:hover:bg-neutral-800 px-2 py-1 rounded w-full"
                                     onClick={() => setOpen(false)}
                                 >
                                     <div className="flex items-end justify-center h-[40px] overflow-hidden rounded-full bg-zinc-600 aspect-square">
@@ -55,7 +55,10 @@ export const Profile = () => {
                                     <X className="stroke-2 w-6" />
                                 </Button>
                             </div>
-                            <Button variant="dark" onClick={() => signOut()}>
+                            <Button
+                                variant="secondary"
+                                onClick={() => signOut()}
+                            >
                                 Logout
                             </Button>
                         </nav>

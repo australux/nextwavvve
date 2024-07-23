@@ -19,7 +19,7 @@ export const DesktopCard = ({ album }: { album: TAlbum }) => {
     }
 
     return (
-        <div className="relative hidden sm:block p-2 bg-card-base hover:shadow-md">
+        <div className="relative hidden sm:block p-2 bg-white dark:bg-black hover:shadow-md ring-1 ring-transparent hover:ring-black dark:hover:ring-white transition-all duration-150">
             <Link
                 href={`/album/${album.id}`}
                 prefetch={true}
@@ -38,7 +38,7 @@ export const DesktopCard = ({ album }: { album: TAlbum }) => {
                 </div>
                 <div className="flex items-start justify-between w-full">
                     <div className="flex items-center gap-2">
-                        <div className="h-10 min-w-10 bg-card-deco flex items-center justify-center rounded">
+                        <div className="h-10 min-w-10 bg-neutral-800 dark:bg-neutral-100 flex items-center justify-center rounded">
                             {rating && (
                                 <p className="text-2xl font-black text-orange-400 opacity-100 transition-opacity duration-300">
                                     {album.rating !== "G" ? album.rating : ""}
