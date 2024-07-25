@@ -19,7 +19,7 @@ export function Modal({ children }: { children: React.ReactNode }) {
     }, []);
 
     function onDismiss() {
-        queryClient.invalidateQueries({ queryKey: ["savedAlbums"] }); // eslint-disable-line
+        queryClient.invalidateQueries({ queryKey: ["savedAlbums"] });
         router.back();
     }
 
