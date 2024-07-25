@@ -84,7 +84,7 @@ export function SearchModal({ handleOpen }: { handleOpen: () => void }) {
         <dialog
             ref={navRef}
             onClose={onDismiss}
-            className="w-[830px] h-max bg-white text-black dark:bg-black dark:text-white ring-2 ring-black dark:ring-white overflow-hidden p-2"
+            className="w-[830px] h-max bg-white text-black dark:bg-black dark:text-white overflow-hidden p-2"
         >
             <div className="flex flex-col gap-2 w-full sm:relative">
                 <form onSubmit={(e) => e.preventDefault()}>

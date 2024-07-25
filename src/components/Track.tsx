@@ -23,11 +23,9 @@ export const Track = ({ track }: TrackProps) => {
             className={`flex flex-col justify-between gap-2 p-2 rounded hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:cursor-pointer ${
                 open && "bg-white dark:bg-black"
             }`}
+            onClick={() => setOpen(!open)}
         >
-            <div
-                className="flex justify-between w-full"
-                onClick={() => setOpen(!open)}
-            >
+            <div className="flex justify-between w-full">
                 <p className="line-clamp-2">{track.name}</p>
                 <div className="flex items-center justify-end gap-2">
                     {open ? (

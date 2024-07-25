@@ -13,7 +13,7 @@
     :root {
         --text-base: 255, 255, 255; /* white */
         --background-frost: 53, 47, 54, 0.8; /* #352F36 for frosted header */
-        --modal-backdrop: 52, 52, 52, 0.65;
+        --modal-backdrop: 229, 229, 229, 0.65;
         --bg-base: 10, 10, 10; /* #0A0A0A */
     }
 }
