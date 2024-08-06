@@ -3,6 +3,7 @@ import { Track } from "@/components/Track";
 import { Selector } from "@/components/ui/Selector";
 import { updateAlbum } from "@/server/queries";
 import { TAlbum } from "@/types/types";
+import Link from "next/link";
 import { useState } from "react";
 
 export const AlbumDetails = ({ album }: { album: TAlbum }) => {
@@ -16,21 +17,35 @@ export const AlbumDetails = ({ album }: { album: TAlbum }) => {
 
     return (
         <div className="h-full w-full shrink flex flex-col gap-4 lg:gap-6 overflow-hidden">
-            <div className="flex flex-col">
+            <div className="flex flex-col gap-2">
                 <p className="text-xl lg:text-[32px] font-bold">{album.name}</p>
-                <p className="lg:text-lg font-medium">
+                <div className="lg:text-lg font-medium hover:underline">
                     {album.artists.length > 1 ? (
                         album.artists.map((artist, i) =>
                             i == album.artists.length - 1 ? (
-                                <span key={i}>{artist.name}</span>
+                                <Link
+                                    key={i}
+                                    href={`/artists/${artist.id}`}
+                                    replace
+                                >
+                                    {artist.name}
+                                </Link>
                             ) : (
-                                <span key={i}>{artist.name}, </span>
+                                <Link
+                                    key={i}
+                                    href={`/artists/${artist.id}`}
+                                    replace
+                                >
+                                    {artist.name},{" "}
+                                </Link>
                             )
                         )
                     ) : (
-                        <span>{album.artists[0].name}</span>
+                        <Link href={`/artists/${album.artists[0].id}`} replace>
+                            {album.artists[0].name}
+                        </Link>
                     )}
-                </p>
+                </div>
             </div>
             <div className="flex flex-col gap-2 overflow-hidden">
                 <p className="text-sm lg:text-base">Rating</p>

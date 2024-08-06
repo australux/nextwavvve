@@ -6,7 +6,7 @@ export default function ArtistPage({
     params: { id: string };
 }) {
     return (
-        <div className="h-screen w-screen flex items-center justify-center">
+        <div className="h-[calc(100vh_-_4rem)] max-w-screen-xl flex items-center justify-center">
             <FullArtistView artistId={artistId} />
         </div>
     );

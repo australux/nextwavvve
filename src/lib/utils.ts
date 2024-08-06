@@ -1,5 +1,5 @@
 import { getUser, saveAlbum } from "@/server/queries";
-import { Album } from "@spotify/web-api-ts-sdk";
+import { Album, Track } from "@spotify/web-api-ts-sdk";
 import clsx from "clsx";
 import { ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";

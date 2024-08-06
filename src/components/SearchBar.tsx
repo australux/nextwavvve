@@ -1,5 +1,3 @@
-"use client";
-
 import { useState } from "react";
 import { Input } from "./ui/Input";
 import { Spinner, X } from "./ui/Svgs";
@@ -24,11 +22,7 @@ export const SearchBar = () => {
         if (!q) throw new Error("There's no search query");
 
         try {
-            const res = await sdk.search(
-                q,
-                ["album", "artist", "track"],
-                undefined
-            );
+            const res = await sdk.search(q, ["album", "artist"], undefined);
             return res;
         } catch (error) {
             console.error(error);
@@ -46,7 +40,7 @@ export const SearchBar = () => {
         setInputValue(value);
         setTimeout(() => {
             setQ(value);
-        }, 200);
+        }, 150);
     }
 
     function handleBlur() {

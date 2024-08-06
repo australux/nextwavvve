@@ -10,8 +10,8 @@ import {
 } from "./ui/SuggestionCard";
 import { Input } from "./ui/Input";
 import { useQuery } from "@tanstack/react-query";
-import { Album } from "@spotify/web-api-ts-sdk";
-import { handleSelection } from "@/lib/utils";
+import { Album, Track } from "@spotify/web-api-ts-sdk";
+import { handleSelection, handleTrackSelection } from "@/lib/utils";
 import { useSession } from "next-auth/react";
 import sdk from "@/lib/spotify-sdk/ClientInstance";
 import { useRouter } from "next/navigation";
@@ -28,11 +28,7 @@ export function SearchModal({ handleOpen }: { handleOpen: () => void }) {
         if (!q) throw new Error("There's no search query");
 
         try {
-            const res = await sdk.search(
-                q,
-                ["album", "artist", "track"],
-                undefined
-            );
+            const res = await sdk.search(q, ["album", "artist"], undefined);
             return res;
         } catch (error) {
             console.error(error);
@@ -58,7 +54,7 @@ export function SearchModal({ handleOpen }: { handleOpen: () => void }) {
         setQ("");
     }
 
-    async function handleClick(id: string) {
+    async function handleAlbumSave(id: string) {
         const fullAlbum: Album = await sdk.makeRequest("GET", `albums/${id}`);
         if (session?.user?.email) {
             await handleSelection(session.user.email, fullAlbum);
@@ -117,9 +113,8 @@ export function SearchModal({ handleOpen }: { handleOpen: () => void }) {
                     <p className="text-lg font-bold w-full text-left">
                         Artists
                     </p>
-                    <p className="text-lg font-bold w-full text-left">Songs</p>
                 </div>
-                <div className="grid grid-cols-3 gap-2 overflow-hidden h-[414px]">
+                <div className="grid grid-cols-2 gap-2 overflow-hidden h-[414px]">
                     {q &&
                         (isLoading ? (
                             <List>
@@ -134,7 +129,7 @@ export function SearchModal({ handleOpen }: { handleOpen: () => void }) {
                                         <ListItem
                                             key={album.id}
                                             onClick={() =>
-                                                handleClick(album.id)
+                                                handleAlbumSave(album.id)
                                             }
                                         >
                                             <AlbumSuggestion album={album} />
@@ -152,13 +147,6 @@ export function SearchModal({ handleOpen }: { handleOpen: () => void }) {
                                             }
                                         >
                                             <ArtistSuggestion artist={artist} />
-                                        </ListItem>
-                                    ))}
-                                </List>
-                                <List>
-                                    {results?.tracks.items.map((track) => (
-                                        <ListItem key={track.id}>
-                                            <TrackSuggestion track={track} />
                                         </ListItem>
                                     ))}
                                 </List>

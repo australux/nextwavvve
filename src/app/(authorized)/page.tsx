@@ -1,19 +1,12 @@
 import { createUser, getSavedAlbums, getUser } from "@/server/queries";
-import {
-    dehydrate,
-    HydrationBoundary,
-    QueryClient,
-} from "@tanstack/react-query";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import Albums from "./commons/albums";
 
 export default async function Home() {
     const session = await getServerSession();
-    const queryClient = new QueryClient();
 
     if (!session || !session.user) {
-        redirect("/login");
+        return <div>no session</div>;
     }
 
     const email = String(session.user.email);
@@ -25,24 +18,11 @@ export default async function Home() {
         await createUser({ name, image, email });
     }
 
-    await queryClient.prefetchQuery({
-        queryKey: ["savedAlbums"],
-        queryFn: fetchAlbums,
-    });
-
-    async function fetchAlbums() {
-        try {
-            const res = await getSavedAlbums();
-            return res;
-        } catch (error) {
-            console.error(error);
-            throw new Error("Error fetching albums");
-        }
+    const sessionEmail = session.user?.email;
+    if (sessionEmail) {
+        const user = await getUser(sessionEmail);
+        redirect(`/u/${user?.id}`);
     }
 
-    return (
-        <HydrationBoundary state={dehydrate(queryClient)}>
-            <Albums />
-        </HydrationBoundary>
-    );
+    return null;
 }

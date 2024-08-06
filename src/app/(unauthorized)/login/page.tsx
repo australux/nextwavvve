@@ -1,19 +1,12 @@
-"use client";
-import { signIn, useSession } from "next-auth/react";
+import NavMenu from "@/components/NavMenu";
+import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
-export default function Login() {
-    const session = useSession();
+export default async function Login() {
+    const session = await getServerSession();
 
-    if (!session || session.status !== "authenticated") {
-        return (
-            <div>
-                <button onClick={() => signIn("spotify")}>
-                    Sign in with Spotify
-                </button>
-            </div>
-        );
+    if (!session) {
+        return <NavMenu />;
     }
-
     redirect("/");
 }

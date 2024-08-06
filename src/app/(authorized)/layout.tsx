@@ -28,9 +28,9 @@ export default async function RootLayout({
             <AuthSessionProvider session={session}>
                 <body className={inter.className}>
                     <Providers>
-                        <div className="flex min-h-screen flex-col items-center justify-between antialiased overflow-hidden">
+                        <div className="flex flex-col items-center min-h-screen antialiased overflow-hidden">
                             <Header />
-                            <main className="overflow-hidden">
+                            <main className="mt-16 overflow-hidden">
                                 {children}
                                 <div id="navbar-root" />
                             </main>

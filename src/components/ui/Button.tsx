@@ -19,7 +19,7 @@ export const Button = ({ variant, className, ...props }: ButtonProps) => {
 };
 
 const buttonVariants = cva(
-    "inline-flex items-center justify-center px-4 py-2 gap-1 transition-all duration-150 rounded-md hover:shadow text-sm group",
+    "inline-flex items-center justify-center px-4 py-2 gap-2 transition-all duration-150 rounded-md hover:shadow text-sm group",
     {
         variants: {
             variant: {

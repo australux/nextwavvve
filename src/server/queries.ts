@@ -31,14 +31,12 @@ export async function getUser(email: string) {
 }
 
 export async function getSavedAlbums() {
-    const session = await getServerSession();
-    if (!session?.user) throw new Error("Unauthorized");
-
     const savedAlbums = await prisma.album.findMany({
         include: {
             images: true,
             artists: true,
             tracks: true,
+            User: true,
         },
     });
 
@@ -54,6 +52,9 @@ export async function saveAlbum(album: {
 }) {
     const session = await getServerSession();
     if (!session?.user) throw new Error("Unauthorized");
+
+    const user = await getUser(String(session.user.email));
+    if (!user) throw new Error("User not found");
 
     return await prisma.album.create({
         data: {
@@ -75,6 +76,7 @@ export async function saveAlbum(album: {
                 },
             },
             savedAt: new Date(),
+            userId: user.id,
         },
     });
 }
@@ -100,6 +102,9 @@ export async function getAlbum(id: string) {
 }
 
 export async function updateAlbum(id: string, rating: string) {
+    const session = await getServerSession();
+    if (!session?.user) throw new Error("Unauthorized");
+
     return await prisma.album.update({
         where: { id },
         data: {
@@ -109,6 +114,9 @@ export async function updateAlbum(id: string, rating: string) {
 }
 
 export async function updateTrack(id: string, rating: string) {
+    const session = await getServerSession();
+    if (!session?.user) throw new Error("Unauthorized");
+
     return await prisma.track.update({
         where: { id },
         data: {

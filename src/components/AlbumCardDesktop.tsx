@@ -21,7 +21,7 @@ export const DesktopCard = ({ album }: { album: TAlbum }) => {
     return (
         <div className="relative hidden sm:block p-2 bg-white dark:bg-black hover:shadow-md ring-1 ring-transparent hover:ring-black dark:hover:ring-white transition-all duration-150">
             <Link
-                href={`/album/${album.id}`}
+                href={`/albums/${album.id}`}
                 prefetch={true}
                 className="flex flex-col gap-2"
                 scroll={false}

@@ -4,6 +4,8 @@ import "@/styles/globals.css";
 import { getServerSession } from "next-auth";
 import AuthSessionProvider from "@/components/SessionProvider";
 import authOptions from "@/app/api/auth/[...nextauth]/authOptions";
+import { Header } from "@/components/Header";
+import Providers from "@/app/(authorized)/providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,9 +25,14 @@ export default async function LoginLayout({
         <html lang="en">
             <AuthSessionProvider session={session}>
                 <body className={inter.className}>
-                    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-                        {children}
-                    </main>
+                    <Providers>
+                        <div className="flex flex-col items-center min-h-screen antialiased overflow-hidden">
+                            <Header />
+                            <main className="mt-16 overflow-hidden">
+                                {children}
+                            </main>
+                        </div>
+                    </Providers>
                 </body>
             </AuthSessionProvider>
         </html>

@@ -22,7 +22,7 @@ export default function FullArtistView(props: { artistId: string }) {
         try {
             const res: Page<SimplifiedAlbum> = await sdk.makeRequest(
                 "GET",
-                `artists/${id}/albums?limit=50&include_groups=single,album,compilation`
+                `artists/${id}/albums?limit=50&include_groups=album,compilation`
             );
             return res;
         } catch (error) {
@@ -43,25 +43,26 @@ export default function FullArtistView(props: { artistId: string }) {
     if (!artist || !albums) return null;
 
     return (
-        <div className=" overflow-hidden">
-            <div className="flex flex-col gap-4 items-center">
-                <div className="h-full rounded-full overflow-hidden">
+        <div className="overflow-hidden">
+            <div className="flex gap-4 items-end justify-between bg-neutral-900">
+                <p className="text-4xl font-bold pl-6 pb-4">{artist.name}</p>
+                <div className="h-full overflow-hidden relative">
                     <Image
                         src={artist.images[0].url}
                         alt={artist.name}
                         width={300}
                         height={300}
                     />
+                    <div className="absolute left-0 top-0 z-10 bg-gradient-to-r from-neutral-900 to-transparent w-[150px] h-[300px]" />
                 </div>
-                <p className="text-2xl font-bold">{artist.name}</p>
             </div>
-            <div className="grid grid-cols-4 h-[400px] overflow-auto bg-l">
+            <div className="grid grid-cols-4 gap-4 h-[400px] overflow-auto bg-l">
                 {albums.items.flatMap((album) => (
                     <Link key={album.id} href={`/a/${album.id}`}>
                         <img
-                            src={album.images[2].url}
+                            src={album.images[1].url}
                             alt={album.name}
-                            className="w-16 h-16"
+                            className="w-full"
                         />
                         <p className="text-sm">{album.name}</p>
                     </Link>
