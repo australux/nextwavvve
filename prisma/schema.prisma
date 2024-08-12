@@ -26,33 +26,35 @@ model Album {
   name    String
   artists Artist[]
   images  Image[]
-  rating  String   @default("G")
+  rating  String   @default("0")
   tracks  Track[]
-  User    User    @relation(fields: [userId], references: [id])
+  User    User     @relation(fields: [userId], references: [id])
   userId  String
-  savedAt DateTime
+  savedAt DateTime @default(now())
 }
 
 model Image {
-  id      Int    @id @default(autoincrement())
-  url     String
-  height  Int
-  width   Int
-  album   Album  @relation(fields: [albumId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  albumId String
+  id       Int    @id @default(autoincrement())
+  url      String
+  height   Int
+  width    Int
+  artist   Artist? @relation(fields: [artistId], references: [id], onDelete: Cascade)
+  artistId String?
+  album    Album?  @relation(fields: [albumId], references: [id], onDelete: Cascade)
+  albumId  String?
 }
 
 model Artist {
-  id      String @id
+  id      String  @id
   name    String
-  albums  Album  @relation(fields: [albumId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  albumId String
+  images  Image[]
+  albums  Album[]
 }
 
 model Track {
-  id      String  @id
+  id      String @id
   name    String
-  rating  String  @default("G")
-  album   Album   @relation(fields: [albumId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  rating  String @default("0")
+  album   Album  @relation(fields: [albumId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   albumId String
 }

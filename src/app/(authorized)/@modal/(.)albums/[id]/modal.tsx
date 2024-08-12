@@ -32,11 +32,11 @@ export function Modal({ children }: { children: React.ReactNode }) {
     return createPortal(
         <dialog
             ref={dialogRef}
-            className="hidden sm:contents h-full lg:h-[32.25rem] w-[26rem] lg:w-[51.875rem] overflow-hidden relative bg-white text-black dark:bg-black dark:text-white"
+            className="hidden sm:contents h-full lg:h-[33.25rem] w-[26rem] lg:w-[52.875rem] rounded-3xl overflow-hidden relative bg-white text-black dark:bg-black dark:text-white"
             onClose={onDismiss}
         >
             {children}
-            <div className="absolute top-3 left-3">
+            <div className="absolute top-3 right-3">
                 <Button onClick={onDismiss} variant="icon">
                     <X className="w-5 stroke-2" />
                 </Button>

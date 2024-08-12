@@ -3,6 +3,8 @@ import { useState } from "react";
 import { ChevronDown, ChevronUp } from "./ui/Svgs";
 import { TTrack } from "@/types/types";
 import { updateTrack } from "@/server/queries";
+import { Selector } from "./ui/Selector";
+import { handleRating } from "@/lib/utils";
 
 type TrackProps = {
     track: TTrack;
@@ -12,11 +14,11 @@ export const Track = ({ track }: TrackProps) => {
     const [rating, setRating] = useState(track.rating);
     const [open, setOpen] = useState(false);
 
-    async function handleRating(e: React.MouseEvent) {
-        const newRating = e.currentTarget.id;
-        await updateTrack(track.id, newRating);
-        setRating(newRating);
-    }
+    // async function handleRating(e: React.MouseEvent) {
+    //     const newRating = e.currentTarget.id;
+    //     await updateTrack(track.id, newRating);
+    //     setRating(newRating);
+    // }
 
     return (
         <div
@@ -30,100 +32,27 @@ export const Track = ({ track }: TrackProps) => {
             >
                 <p className="line-clamp-2">{track.name}</p>
                 <div className="flex items-center justify-end gap-2">
-                    {open ? (
-                        <ChevronUp
-                            className={`w-4 h-4 stroke-2 ${
-                                rating !== "G" && "text-orange-400"
-                            }`}
-                        />
-                    ) : (
-                        <ChevronDown
-                            className={`w-4 h-4 stroke-2 ${
-                                rating !== "G" && "text-orange-400"
-                            }`}
-                        />
-                    )}
+                    <ChevronUp
+                        className={`w-4 h-4 stroke-2 transition duration-200 ${
+                            rating !== "0" && "text-orange-400"
+                        } ${open && "rotate-180"}`}
+                    />
                 </div>
             </div>
             {open && (
-                <div className="flex justify-end w-full gap-1">
-                    <div
-                        className={`font-black text-lg px-1 hover:cursor-pointer ${
-                            rating === "F"
-                                ? "text-orange-400"
-                                : "text-zinc-400 hover:text-zinc-500"
-                        }`}
-                        id="F"
-                        onClick={handleRating}
-                    >
-                        F
-                    </div>
-                    <div
-                        className={`font-black text-lg px-1 hover:cursor-pointer ${
-                            rating === "E"
-                                ? "text-orange-400"
-                                : "text-zinc-400 hover:text-zinc-500"
-                        }`}
-                        id="E"
-                        onClick={handleRating}
-                    >
-                        E
-                    </div>
-                    <div
-                        className={`font-black text-lg px-1 hover:cursor-pointer ${
-                            rating === "D"
-                                ? "text-orange-400"
-                                : "text-zinc-400 hover:text-zinc-500"
-                        }`}
-                        id="D"
-                        onClick={handleRating}
-                    >
-                        D
-                    </div>
-                    <div
-                        className={`font-black text-lg px-1 hover:cursor-pointer ${
-                            rating === "C"
-                                ? "text-orange-400"
-                                : "text-zinc-400 hover:text-zinc-500"
-                        }`}
-                        id="C"
-                        onClick={handleRating}
-                    >
-                        C
-                    </div>
-                    <div
-                        className={`font-black text-lg px-1 hover:cursor-pointer ${
-                            rating === "B"
-                                ? "text-orange-400"
-                                : "text-zinc-400 hover:text-zinc-500"
-                        }`}
-                        id="B"
-                        onClick={handleRating}
-                    >
-                        B
-                    </div>
-                    <div
-                        className={`font-black text-lg px-1 hover:cursor-pointer ${
-                            rating === "A"
-                                ? "text-orange-400"
-                                : "text-zinc-400 hover:text-zinc-500"
-                        }`}
-                        id="A"
-                        onClick={handleRating}
-                    >
-                        A
-                    </div>
-                    <div
-                        className={`font-black text-lg px-1 hover:cursor-pointer ${
-                            rating === "S"
-                                ? "text-orange-400"
-                                : "text-zinc-400 hover:text-zinc-500"
-                        }`}
-                        id="S"
-                        onClick={handleRating}
-                    >
-                        S
-                    </div>
+                <div className="flex justify-end px-4 pb-4">
+                    <Selector
+                        rating={rating}
+                        handleRating={(e) =>
+                            handleRating(
+                                e,
+                                rating,
+                                setRating,
+                                updateTrack,
+                                track.id
+                            )
+                        }
+                    />
                 </div>
             )}
         </div>

@@ -6,7 +6,7 @@ import { ListItem } from "./ui/ListItem";
 import sdk from "@/lib/spotify-sdk/ClientInstance";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "./ui/Button";
-import { Album } from "@spotify/web-api-ts-sdk";
+import { Album, Artist } from "@spotify/web-api-ts-sdk";
 import { useSession } from "next-auth/react";
 import { handleSelection } from "@/lib/utils";
 import { useRouter } from "next/navigation";
@@ -55,6 +55,7 @@ export const SearchBar = () => {
 
     async function handleClick(id: string) {
         const fullAlbum: Album = await sdk.makeRequest("GET", `albums/${id}`);
+
         if (session?.user?.email) {
             await handleSelection(session.user.email, fullAlbum);
         }

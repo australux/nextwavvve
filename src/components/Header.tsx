@@ -1,6 +1,6 @@
 "use client";
 
-import { Wavvve } from "./ui/Svgs";
+import { Wavvve, WavvveLogo } from "./ui/Svgs";
 import Link from "next/link";
 import { useState } from "react";
 import NavMenu from "./NavMenu";
@@ -17,7 +17,7 @@ export const Header = () => {
             <div className="flex items-center justify-between w-full max-w-screen-xl gap-2 xl:px-4 relative -left-2">
                 <div className="flex items-center justify-center w-24">
                     <Link href={"/"}>
-                        <Wavvve className="w-16 sm:w-full" />
+                        <WavvveLogo className="w-16 sm:w-full" />
                     </Link>
                 </div>
                 <NavMenu />

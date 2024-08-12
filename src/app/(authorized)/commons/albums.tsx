@@ -1,5 +1,6 @@
 "use client";
 
+import { AlbumCard } from "@/components/AlbumCard";
 import { DesktopCard } from "@/components/AlbumCardDesktop";
 import { MobileCard } from "@/components/AlbumCardMobile";
 import { getSavedAlbums, getUser } from "@/server/queries";
@@ -39,8 +40,9 @@ export default function Albums() {
                 <div className="flex flex-col w-full max-w-screen-xl gap-4 px-4 md:px-2 py-4 sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                     {albumsList.map((album) => (
                         <div key={album.id}>
-                            <MobileCard album={album} />
-                            <DesktopCard album={album} />
+                            <AlbumCard album={album} />
+                            {/* <MobileCard album={album} /> */}
+                            {/* <DesktopCard album={album} /> */}
                         </div>
                     ))}
                 </div>

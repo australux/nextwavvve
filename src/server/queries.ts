@@ -34,7 +34,11 @@ export async function getSavedAlbums() {
     const savedAlbums = await prisma.album.findMany({
         include: {
             images: true,
-            artists: true,
+            artists: {
+                include: {
+                    images: true,
+                },
+            },
             tracks: true,
             User: true,
         },
@@ -46,7 +50,11 @@ export async function getSavedAlbums() {
 export async function saveAlbum(album: {
     id: string;
     name: string;
-    artists: { id: string; name: string }[];
+    artists: {
+        id: string;
+        name: string;
+        images: { url: string; height: number; width: number }[];
+    }[];
     images: { url: string; height: number; width: number }[];
     tracks: { id: string; name: string }[];
 }) {
@@ -61,9 +69,18 @@ export async function saveAlbum(album: {
             id: album.id,
             name: album.name,
             artists: {
-                createMany: {
-                    data: album.artists,
-                },
+                connectOrCreate: album.artists.map((artist) => ({
+                    where: { id: artist.id },
+                    create: {
+                        id: artist.id,
+                        name: artist.name,
+                        images: {
+                            createMany: {
+                                data: artist.images,
+                            },
+                        },
+                    },
+                })),
             },
             images: {
                 createMany: {
@@ -75,7 +92,6 @@ export async function saveAlbum(album: {
                     data: album.tracks,
                 },
             },
-            savedAt: new Date(),
             userId: user.id,
         },
     });
@@ -94,7 +110,11 @@ export async function getAlbum(id: string) {
     return await prisma.album.findUnique({
         where: { id },
         include: {
-            artists: true,
+            artists: {
+                include: {
+                    images: true,
+                },
+            },
             images: true,
             tracks: true,
         },
